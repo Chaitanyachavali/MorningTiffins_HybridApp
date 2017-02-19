@@ -1,0 +1,173 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+    <!-- nav start -->
+    <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Morning Tiffin's</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">Profile</a></li>
+        <li><a href="category.html">Category's</a></li>
+        <li><a href="buylist.html">Check Out</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+      	<li><a href="#"></a></li>
+      	<li><a href="#"></a></li>
+      	<li><a href="#"></a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="category.html">Category's</a></li>
+        <li><a href="buylist.html">Check Out</a></li>
+      </ul>
+    </div>
+  </nav>
+<!-- nav ends -->
+<br><br>
+<center>
+<div id="header_content">
+  </div>
+  <div class="row">
+    <form class="col s12" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="name" name="name" type="text" class="validate">
+          <label for="icon_prefix">Name</label>
+        </div>
+        <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">phone</i>
+          <input id="telephone" name="telephone" type="text" class="validate">
+          <label for="icon_prefix">Telephone</label>
+        </div>
+        <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">view_week</i>
+          <input id="quantity" name="quantity" type="text" class="validate">
+          <label for="icon_prefix">Quantity</label>
+        </div>
+        <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">mode_edit</i>
+          <input id="remarks" name="remarks" type="text" class="validate">
+          <label for="icon_prefix">Remarks</label>
+        </div>
+        <!-- <div class="row">
+          <label for="date">Date of Delivery</label>
+          <input type="date" class="datepicker" id="date">
+        </div> -->
+        <div class="row">
+        <div class="input-field col s12">
+          <select name="type_taste" id="type_taste">
+            <option value=""></option>
+            <option value="Plain">Plain</option>
+            <option value="Spicy">Spicy</option>
+            <option value="Normal">Normal</option>
+          </select>
+          <label>Choose Type</label>
+       </div><br>
+       <button class="btn waves-effect waves-light" type="submit" name="orderBtn" id="orderBtn">Order
+        <i class="material-icons right">send</i>
+      </button>
+       </div>
+    </form>
+  </div>
+</center><br>
+<footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <p class="grey-text text-lighten-4">Online Foods and Caters.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">Developed By Chaitanya Reddy <a href="https://github.com/chaitanyachavali/">(@chaitanyachavali)</a></div>
+          </div>
+</footer>
+
+
+      <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript">
+      // for side nav
+      	$(document).ready(function(){
+      		 $(".button-collapse").sideNav();
+      		});
+      	//
+        $(document).ready(function(){
+          $('select').material_select();
+        });
+         $('.datepicker').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 2
+        });
+      </script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          var selected_item = "temp";
+          selected_item = window.localStorage.getItem('selected_item');
+          var dataString = 'selected_item='+ selected_item;
+          $.ajax({
+                          type: "POST",
+                          url: "http://morningtiffins.16mb.com/app_scripts/getItemType.php",
+                          data: dataString,
+                          cache: false,
+                          success: function(result){
+                            //alert(result);
+                            var type = JSON.parse(result);
+                            var display = '<h4 class="header">Selected: '+selected_item+'</h4>'
+                                          +'<p>Type: '+type.category+'</p>';
+                              $('#header_content').append(display);
+                                                    },
+                            error: function(result){
+                              alert("Unsufficient details. Not able to connect to server");
+                                   }
+                          });
+        });
+      </script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+$("#orderBtn").click(function(){
+var selected_item = "temp";
+              var email = "email";
+              email = window.localStorage.getItem('email');
+              selected_item = window.localStorage.getItem('selected_item');
+              var name = $("#name").val();
+              var telephone = $("#telephone").val();
+              var quantity = $("#quantity").val();
+              var remarks = $("#remarks").val();
+              var type_taste = $("#type_taste").val();
+if(telephone == '')
+ {
+                alert("Fill The fields to Continue");
+              }
+else{
+$.post("http://morningtiffins.16mb.com/app_scripts/insertBuylist.php", 
+{
+'name':name,
+'telephone':telephone,
+'quantity':quantity,
+'remarks':remarks, 
+'selected_item':selected_item, 
+'email':email, 
+'type_taste':type_taste},
+function(response,status){ // Required Callback Function
+var opt = JSON.parse(response);
+alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);
+if(opt.result == true)
+{
+  alert("yes from here");
+  window.location.href = "buylist.html";
+}
+});
+}
+});
+});
+      </script>
+    </body>

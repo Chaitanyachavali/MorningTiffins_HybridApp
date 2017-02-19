@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Online Food Ordering App</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <style type="text/css">
+    nav ul a,
+    nav .brand-logo {
+      color: #444;
+    }
+
+    p {
+      line-height: 2rem;
+    }
+
+    .button-collapse {
+      color: #26a69a;
+    }
+
+    .parallax-container {
+      min-height: 380px;
+      line-height: 0;
+      height: auto;
+      color: rgba(255,255,255,.9);
+    }
+      .parallax-container .section {
+        width: 100%;
+      }
+
+    @media only screen and (max-width : 992px) {
+      .parallax-container .section {
+        position: absolute;
+        top: 40%;
+      }
+      #index-banner .section {
+        top: 10%;
+      }
+    }
+
+    @media only screen and (max-width : 600px) {
+      #index-banner .section {
+        top: 0;
+      }
+    }
+
+    .icon-block {
+      padding: 0 15px;
+    }
+    .icon-block .material-icons {
+      font-size: inherit;
+    }
+
+    footer.page-footer {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body background = "img/food-019.jpg" >
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">Morning Tiffin's</a>
+    </div>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2">Morning Tiffin's</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Describe here about your company and items</h5>
+        </div>
+        <div class="row center">
+          <button class="btn waves-effect waves-light" type="submit" name="action" id="login">Log in</button>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#login").click(function(){
+        var email = "test@gmail.com";
+        window.localStorage.setItem('email', email);
+        //getvar = window.localStorage.getItem('user_id');
+        //window.localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = "category.html";
+        });
+    });
+  </script>
+  </body>
+</html>

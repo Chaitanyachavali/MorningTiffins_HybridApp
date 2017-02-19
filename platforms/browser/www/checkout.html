@@ -1,0 +1,115 @@
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+    <!-- nav start -->
+    <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Morning Tiffin's</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">Profile</a></li>
+        <li><a href="category.html">Category's</a></li>
+        <li><a href="checkout.html">Check Out</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+      	<li><a href="#"></a></li>
+      	<li><a href="#"></a></li>
+      	<li><a href="#"></a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="buylist.html">Category's</a></li>
+        <li><a href="buylist.html">Check Out</a></li>
+      </ul>
+    </div>
+  </nav>
+<!-- nav ends -->
+<br><br>
+<center>
+	<h3 class="header">Final Checkout</h3><br>
+	 <table class="responsive-table" class="striped">
+        <thead>
+          <tr>
+              <th data-field="id">Item Name</th>
+              <th data-field="name">Quantity</th>
+              <th data-field="price">Per Item</th>
+              <th data-field="price">Total</th>
+          </tr>
+        </thead>
+
+        <tbody id="tbody">
+        </tbody>
+      </table><br><br>
+      <div id="totaldiv"> </div>  
+      <a class="waves-effect waves-light btn">Make Payment</a><br><br>
+      <a href="buylist.html" class="waves-effect waves-light btn">Go Back to Cart</a><br>
+</center><br>
+<footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <p class="grey-text text-lighten-4">Online Foods and Caters.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">Developed By Chaitanya Reddy <a href="https://github.com/chaitanyachavali/">(@chaitanyachavali)</a></div>
+          </div>
+</footer>
+
+
+      <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript">
+      // for side nav
+      	$(document).ready(function(){
+      		 $(".button-collapse").sideNav();
+      		});
+      	//
+      </script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          var email = "temp";
+          email = window.localStorage.getItem('email');
+          var gtotal = 0;
+          var dataString = 'email='+ email;
+          $.ajax({
+                          type: "POST",
+                          url: "http://morningtiffins.16mb.com/app_scripts/getBuyList.php",
+                          data: dataString,
+                          cache: false,
+                          success: function(result){
+                            //alert(result);
+                          if(result == 'Invalid')
+                            {
+                              alert("Data Ripped");
+                            }
+                            else
+                            {
+                              var buy = JSON.parse(result);
+                              for(var i in buy)
+                               {
+                                  var total = buy[i].quantity*buy[i].price_per_item;
+                                  gtotal = total+gtotal;
+                                  var details = '<tr>'
+                                                +'<td>'+buy[i].item_name+'</td>'
+                                                +'<td>'+buy[i].quantity+'</td>'
+                                                +'<td>INR '+buy[i].price_per_item+'</td>'
+                                                +'<td>'+total+'</td>'
+                                                +'</tr>';
+                                  $('#tbody').append(details);
+                              }
+                              $('#totaldiv').append('<h5>Grand Total : INR '+gtotal+' </h5> <br>')
+                            }
+                                                    },
+                            error: function(data){
+                              
+                              alert("Unsufficient details. Not able to connect to server");
+                                   }
+                          });
+    });
+      </script>
+    </body>
