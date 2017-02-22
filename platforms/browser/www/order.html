@@ -115,7 +115,7 @@
           var dataString = 'selected_item='+ selected_item;
           $.ajax({
                           type: "POST",
-                          url: "http://morningtiffins.16mb.com/app_scripts/getItemType.php",
+                          url: "https://morningtiffins.000webhostapp.com/app_scripts/getItemType.php",
                           data: dataString,
                           cache: false,
                           success: function(result){
@@ -132,42 +132,45 @@
         });
       </script>
       <script type="text/javascript">
-        $(document).ready(function(){
-$("#orderBtn").click(function(){
-var selected_item = "temp";
-              var email = "email";
-              email = window.localStorage.getItem('email');
-              selected_item = window.localStorage.getItem('selected_item');
-              var name = $("#name").val();
-              var telephone = $("#telephone").val();
-              var quantity = $("#quantity").val();
-              var remarks = $("#remarks").val();
-              var type_taste = $("#type_taste").val();
-if(telephone == '')
- {
-                alert("Fill The fields to Continue");
+      $(document).ready(function(e){
+        $("#orderBtn").click(function(){
+          var selected_item = "temp";
+          var email = "email";
+          email = window.localStorage.getItem('email');
+          selected_item = window.localStorage.getItem('selected_item');
+          var name = $("#name").val();
+          var telephone = $("#telephone").val();
+          var quantity = $("#quantity").val();
+          var remarks = $("#remarks").val();
+          var type_taste = $("#type_taste").val();
+          var dataString = 'selected_item='+ selected_item + '&email='+ email + '&name='+ name + '&telephone='+ telephone + '&quantity='+ quantity + '&remarks='+ remarks + '&type_taste='+ type_taste;
+          if(telephone == '')
+          {
+            alert("Please fill the form");
+          }
+          else
+          {
+            alert(dataString);
+            $.ajax({
+              url: 'https://morningtiffins.000webhostapp.com/app_scripts/insertBuylist.php',
+              type: 'post',
+              data: dataString,
+              cache: false,
+              success: function(data)
+              {
+                  var type = JSON.parse(data);
+                  alert(type);
+                  alert("hsdgvdu");
+              },
+              error: function(data)
+              {
+                  var type = JSON.parse(data);
+                  alert(type);
               }
-else{
-$.post("http://morningtiffins.16mb.com/app_scripts/insertBuylist.php", 
-{
-'name':name,
-'telephone':telephone,
-'quantity':quantity,
-'remarks':remarks, 
-'selected_item':selected_item, 
-'email':email, 
-'type_taste':type_taste},
-function(response,status){ // Required Callback Function
-var opt = JSON.parse(response);
-alert("*----Received Data----*\n\nResponse : " + response+"\n\nStatus : " + status);
-if(opt.result == true)
-{
-  alert("yes from here");
-  window.location.href = "buylist.html";
-}
-});
-}
-});
-});
+            });
+          }
+          e.preventDefault;
+          });
+        });
       </script>
     </body>

@@ -75,25 +75,27 @@
           <h5 class="header col s12 light">Describe here about your company and items</h5>
         </div>
         <div class="row center">
-          <button class="btn waves-effect waves-light" type="submit" name="action" id="login">Log in</button>
+          <button class="btn waves-effect waves-light" type="submit" name="action" id="login">Log via Google+</button>
         </div>
         <br><br>
-
+        <div id="loginStatus"></div>
       </div>
     </div>
   </div>
 
   <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/googleLogin.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript">
     $(document).ready(function(){
-      $("#login").click(function(){
+      var check = window.localStorage.getItem('gmailLogin');
+      if(check == 'true')
+      {
+        window.location.href="category.html";
         var email = "test@gmail.com";
         window.localStorage.setItem('email', email);
-        //getvar = window.localStorage.getItem('user_id');
-        //window.localStorage.setItem('isLoggedIn', 'true');
-        window.location.href = "category.html";
-        });
+      }  
     });
   </script>
   </body>
