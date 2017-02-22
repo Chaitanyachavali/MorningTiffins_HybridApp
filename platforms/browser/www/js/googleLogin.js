@@ -74,7 +74,7 @@ $(document).on('deviceready', function() {
                     // Save the userprofile data in your localStorage.
                     localStorage.gmailLogin = "true";
                     localStorage.gmailID = data.id;
-                    localStorage.gmailEmail = data.email;
+                    localStorage.email = data.email;
                     localStorage.gmailFirstName = data.given_name;
                     localStorage.gmailLastName = data.family_name;
                     var fullname = data.given_name.concat(data.family_name)
@@ -87,17 +87,20 @@ $(document).on('deviceready', function() {
                     // //alert(check);
                     // //alert("Data Shown");
 
-                    // var dataString = 'google_id='+ data.id + '&mail='+ data.email + '&name='+ fullname + '&gender='+ data.gender;
-                    // //alert(dataString);
-                    // $.ajax({  
-                    //     type: "POST",  
-                    //     url: "",  
-                    //     data: dataString,  
-                    //     success: function(dataString) {  
+                    var dataString = 'google_id='+ data.id + '&mail='+ data.email + '&name='+ fullname + '&gender='+ data.gender;
+                    //alert(dataString);
+                    $.ajax({  
+                        type: "POST",  
+                        url: "https://morningtiffins.000webhostapp.com/app_scripts/insertNewUser.php",  
+                        data: dataString,  
+                        success: function(dataString) {  
+                            //alert(dataString);
+                            //alert("New User Added to database");
+                            window.location.href="category.html";
                              
-                    //     }  
-                    // });
-                    window.location.href="category.html";
+                        }  
+                    });
+                    //window.location.href="category.html";
                 }
             });
         }).fail(function(data) {

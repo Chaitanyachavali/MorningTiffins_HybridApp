@@ -13,23 +13,18 @@
     <body>
     <!-- nav start -->
     <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Morning Tiffin's</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#">Profile</a></li>
-        <li><a href="category.html">Category's</a></li>
-        <li><a href="buylist.html">Check Out</a></li>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-      	<li><a href="#"></a></li>
-      	<li><a href="#"></a></li>
-      	<li><a href="#"></a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="category.html">Category's</a></li>
-        <li><a href="buylist.html">Check Out</a></li>
-      </ul>
-    </div>
+    <ul id="slide-out" class="side-nav">
+    <li>
+    <div id="user_details"></div></li>
+    <li><a href="#"><i class="material-icons">cloud</i>Welcome to MorningTiffins</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Navigate</a></li>
+    <li><a class="waves-effect" href="#">Profile</a></li>
+    <li><a class="waves-effect" href="category.html">Category's</a></li>
+    <li><a class="waves-effect" href="buylist.html">Check Out</a></li>
+  </ul>
+  <a href="#" class="brand-logo">MT Logo</a>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
   </nav>
 <!-- nav ends -->
 <br><br>
@@ -60,6 +55,22 @@
       		 $(".button-collapse").sideNav();
       		});
       	//
+      </script>
+      <script type="text/javascript">
+      $(document).ready(function(){
+        var name = window.localStorage.getItem('gmailFullName');
+        var email = window.localStorage.getItem('email');
+        var img = window.localStorage.getItem('gmailProfilePicture');
+         var display = '<div class="userView">'
+                        +'<div class="background">'
+                        +'<img src="img/office.jpg">'
+                      +'</div>'
+                      +'<a href="#!user"><img class="circle" src="'+img+'"></a>'
+                      +'<a href="#!name"><span class="white-text name">'+name+'</span></a>'
+                      +'<a href="#!email"><span class="white-text email">'+email+'</span></a>'
+                      +'</div>';
+          $('#user_details').append(display)
+          });
       </script>
       <script type="text/javascript">
         $(document).ready(function(){
