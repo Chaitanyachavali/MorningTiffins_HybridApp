@@ -28,6 +28,8 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        document.addEventListener("offline", function onOffline(){alert('You are now offline!. Please connect to internet before proceeding to further steps/');}, false);
+        document.addEventListener("online", function onOnline(){alert('You are now online!');}, false);
     },
 
     // Update DOM on a Received Event

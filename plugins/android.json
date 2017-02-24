@@ -12,6 +12,9 @@
         },
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.morning.app"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.chaitanya.morningtiffins"
         }
     },
     "dependent_plugins": {}

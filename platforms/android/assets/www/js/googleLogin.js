@@ -81,6 +81,7 @@ $(document).on('deviceready', function() {
                     localStorage.gmailFullName = fullname;
                     localStorage.gmailProfilePicture = data.picture;
                     localStorage.gmailGender = data.gender;
+                    localStorage.contact = 'false';
                     // //alert("Got all the data");
                     // var check = "temp";
                     // check = window.localStorage.getItem('gmailEmail');
